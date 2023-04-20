@@ -11,4 +11,6 @@
 #
 class Product < ApplicationRecord
   has_many_attached :images, :dependent => :destroy
+
+  validates :code, presence: true, uniqueness: true
 end
