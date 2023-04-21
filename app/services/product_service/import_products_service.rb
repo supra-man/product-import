@@ -1,6 +1,7 @@
 module ProductService
   class ImportProductsService
     require 'csv'
+    require 'open-uri'
     attr_accessor :csv_file, :file, :csv_data, :images
 
     def initialize(csv_file)
@@ -26,13 +27,20 @@ module ProductService
 
     def create_products
       # ActiveStorage::Current.host = "http://localhost:3000"
+      # binding.pry
+      # images = "https://i.imgur.com/ZWnhY9T.png"
+      # downloaded_image = URI.parse(image_url).open
+      # Product.last.images.attach(io:downloaded_image,filename:"ffo.jpg")
       ActiveRecord::Base.transaction do
         csv_data.each do |row|
-          product = Product.find_or_initialize_by(row)
-          product.images.attach(row.images)
+          product = Product.find_or_initialize_by(row.except("images"))
+          row["images"].each do |image,index|
+            downloaded_image = URI.parse(image).open
+            product.images.attach(io:downloaded_image,filename:"#{row["code"]}-#{index}")
+          end
+          product.save!
         end
       end
-      puts url_for(Product.first.images.first)
     end
   end
 end
