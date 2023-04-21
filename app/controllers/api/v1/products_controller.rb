@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :set_api_v1_product, only: %i[show update destroy]
+  before_action :set_product, only: %i[show update destroy]
 
   # GET /api/v1/products
   def index
@@ -10,6 +10,7 @@ class Api::V1::ProductsController < ApplicationController
 
   # GET /api/v1/products/1
   def show
+
     render json: @product
   end
 

@@ -31,10 +31,10 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 
 gem 'pg', '~> 1.4', '>= 1.4.6'
-gem 'pry', '~> 0.14.2'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+gem 'annotate'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
@@ -42,6 +42,10 @@ gem 'pry', '~> 0.14.2'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry', '~> 0.14.2'
+  gem 'rspec-rails'
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
+  gem 'faker', '~> 3.2'
 end
 
 group :development do

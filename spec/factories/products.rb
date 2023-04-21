@@ -9,8 +9,9 @@
 #  created_at                                                      :datetime         not null
 #  updated_at                                                      :datetime         not null
 #
-class Product < ApplicationRecord
-  has_many_attached :images, :dependent => :destroy
-
-  validates :code, presence: true, uniqueness: true
+FactoryBot.define do
+  factory :product do
+    code { Faker::Number.number(digits: 3) }
+    name { Faker::Lorem.word }
+  end
 end
