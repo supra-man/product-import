@@ -48,6 +48,6 @@ class Api::V1::ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:code, :name, :csv_file)
+    params.require(:product).permit(:code, :name, :csv_file,:images)
   end
 end
