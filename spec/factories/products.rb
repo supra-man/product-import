@@ -9,9 +9,13 @@
 #  created_at                                                      :datetime         not null
 #  updated_at                                                      :datetime         not null
 #
+# Indexes
+#
+#  index_products_on_code  (code) UNIQUE
+#
 FactoryBot.define do
   factory :product do
-    code { Faker::Number.number(digits: 3) }
+    code { |n| "998#{n}" }
     name { Faker::Lorem.word }
   end
 end

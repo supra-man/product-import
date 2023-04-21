@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_142733) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition"
+    t.index ["code"], name: "index_products_on_code", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

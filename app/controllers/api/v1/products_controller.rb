@@ -10,14 +10,15 @@ class Api::V1::ProductsController < ApplicationController
 
   # GET /api/v1/products/1
   def show
-
     render json: @product
   end
 
   # POST /api/v1/products
   def create
+    file = params[:csv_file]
+    images = params[:images]
+    ProductService::ImportProductsService.new(file).execute
     @product = Product.new(product_params)
-
     if @product.save
       render json: @product, status: :created, location: @product
     else
@@ -48,6 +49,6 @@ class Api::V1::ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:code, :name, :csv_file,:images)
+    params.require(:product).permit(:code, :name, :csv_file, :images)
   end
 end
