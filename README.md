@@ -1,24 +1,45 @@
-# README
+# Import Products
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project helps save products with name and images in the databse by exporting from csv file.
 
-Things you may want to cover:
+# Prerequisites
 
-* Ruby version
+Make sure you have the following installed on your local machine:
 
-* System dependencies
+- Ruby 3.0.1
+- Rails 7.0.4
+- PostgreSQL 1.4
+- Redis 4.6.0
+- Sidekiq 6.5.1
+- libvip
 
-* Configuration
+# Getting Started
 
-* Database creation
+## Setting up the application
 
-* Database initialization
+1. Run bundle :
 
-* How to run the test suite
+   - `bundle install`
 
-* Services (job queues, cache servers, search engines, etc.)
+2. Create the database and run the migrations.
+   - `rails db:create `
+   - `rails db:migrate`
+3. Start the Sidekiq server :
+   - `bundle exec sidekiq`
+4. Start the Rails server.
 
-* Deployment instructions
+   - `rails s`
 
-* ...
+### NOTE:
+
+ruby-vips gem has been used as a image processing library to optimize bulk image insertion, if an error comes while running the server,libvip should be install or ruby-vip gem sould be removed from Gemfile.
+
+- `sudo apt install libvips`
+
+## Running the tests
+
+Rspec has been used to carry out tests.
+
+- To run the tests, use the following command:
+
+  - `rspec`
