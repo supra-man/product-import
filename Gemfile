@@ -39,6 +39,8 @@ gem "image_processing", "~> 1.2"
 gem "kaminari", "~> 1.2", ">= 1.2.2"
 gem "net-http"
 gem "sidekiq", "~>6.5.1"
+gem "ruby-vips", "~> 2.1", ">= 2.1.4"
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 

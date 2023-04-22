@@ -235,7 +235,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    sqlite3 (1.6.2-x86_64-linux)
     thor (1.2.1)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -267,9 +266,9 @@ DEPENDENCIES
   redis (~> 4.6.0)
   rspec-rails
   rspec-sidekiq (~> 3.1)
+  ruby-vips (~> 2.1, >= 2.1.4)
   sidekiq (~> 6.5.1)
   simplecov
-  sqlite3 (~> 1.4)
   tzinfo-data
 
 RUBY VERSION

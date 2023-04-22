@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: products
+#
+#  id                                                              :bigint           not null, primary key
+#  #<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition :string
+#  code                                                            :string           not null
+#  name                                                            :string
+#  created_at                                                      :datetime         not null
+#  updated_at                                                      :datetime         not null
+#
+# Indexes
+#
+#  index_products_on_code  (code) UNIQUE
+#
 class ProductSerializer < ActiveModel::Serializer
   include ActiveModel::Serializer::Pagination
   attributes :name, :code, :images
