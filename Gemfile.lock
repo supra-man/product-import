@@ -113,6 +113,8 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    graphql (2.0.21)
+    graphql-ruby (9001.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -256,6 +258,8 @@ DEPENDENCIES
   debug
   factory_bot (~> 6.2, >= 6.2.1)
   faker (~> 3.2)
+  graphql
+  graphql-ruby
   image_processing (~> 1.2)
   kaminari (~> 1.2, >= 1.2.2)
   net-http
