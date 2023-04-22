@@ -1,24 +1,12 @@
-# README
+# Import Products
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project helps save products with name and images in the databse by exporting from csv file.
 
-Things you may want to cover:
+#Prerequisites
+Make sure you have the following installed on your local machine:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Ruby 3.0.1
+Rails 7.0.4
+PostgreSQL
+Redis
+Sidekiq

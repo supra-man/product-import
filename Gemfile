@@ -8,9 +8,6 @@ ruby "3.0.1"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -35,13 +32,13 @@ gem "bootsnap", require: false
 gem "pg", "~> 1.4", ">= 1.4.6"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "annotate"
-gem "image_processing", "~> 1.2"
-gem "sidekiq", "~>6.5.1"
-gem "net-http"
-gem "aws-sdk-s3", "~> 1.121"
 gem "active_model_serializers", "~> 0.10.13"
+gem "annotate"
+gem "aws-sdk-s3", "~> 1.121"
+gem "image_processing", "~> 1.2"
 gem "kaminari", "~> 1.2", ">= 1.2.2"
+gem "net-http"
+gem "sidekiq", "~>6.5.1"
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
