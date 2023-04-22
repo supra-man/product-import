@@ -22,16 +22,6 @@ module Api
         render json: { product: product, images: images }
       end
 
-      def create
-        @product = Product.new(product_params)
-
-        if @product.save
-          render json: @product, status: :created, location: @product
-        else
-          render json: @product.errors, status: :unprocessable_entity
-        end
-      end
-
       def import_products
         file = params[:csv_file]
         csv_data = extract_csv(file)
@@ -40,14 +30,6 @@ module Api
           render json: "CSV submitted for processing.", status: :created
         else
           render json: csv_data[:message]
-        end
-      end
-
-      def update
-        if @product.update(product_params)
-          render json: @product
-        else
-          render json: @product.errors, status: :unprocessable_entity
         end
       end
 
