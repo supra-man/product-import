@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: products
@@ -9,9 +11,13 @@
 #  created_at                                                      :datetime         not null
 #  updated_at                                                      :datetime         not null
 #
+# Indexes
+#
+#  index_products_on_code  (code) UNIQUE
+#
 FactoryBot.define do
   factory :product do
-    code { Faker::Number.number(digits: 3) }
+    sequence(:code) { |n| "BOK-#{n}-#{SecureRandom.hex(2)}" }
     name { Faker::Lorem.word }
   end
 end
