@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "active_job/test_helper"
 
 RSpec.describe "Api::V1::Products", type: :request do
   let(:product1) { create(:product) }
@@ -37,6 +38,33 @@ RSpec.describe "Api::V1::Products", type: :request do
   end
 
   describe "DELETE /product/:id" do
+    before do
+      FactoryBot.create_list(:product, 10)
+    end
+    it "returns a product" do
+      expect do
+        delete "/api/v1/products/#{Product.first.id}"
+      end.to change(Product, :count).by(-1)
+    end
+  end
+
+  describe "Check CSV Valid" do
+    let(:file_path) { "./spec/fixtures/product.csv" }
+    it "Should save product" do
+      post "/api/v1/products/import", params: { csv_file: Rack::Test::UploadedFile.new(file_path) }
+      expect(response.body).to eq("CSV submitted for processing.")
+    end
+  end
+
+  describe "Check invalid csv" do
+    let(:file_path) { "./spec/fixtures/missingheader.csv" }
+    it "Should raise error when header missing" do
+      post "/api/v1/products/import", params: { csv_file: Rack::Test::UploadedFile.new(file_path) }
+      expect(response.body).to eq("Invalid CSV file format. Expected headers: name, code, image")
+    end
+  end
+
+  describe "Describe check csv validity" do
     before do
       FactoryBot.create_list(:product, 10)
     end

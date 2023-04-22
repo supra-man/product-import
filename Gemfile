@@ -49,6 +49,7 @@ group :development, :test do
   gem "pry", "~> 0.14.2"
   gem "rspec-rails"
   gem "simplecov", require: false
+  gem "rspec-sidekiq", "~> 3.1"
 end
 
 group :development do
