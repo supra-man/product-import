@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: products
@@ -15,7 +17,7 @@
 #
 FactoryBot.define do
   factory :product do
-    code { |n| "998#{n}" }
+    sequence(:code) { |n| "BOK-#{n}-#{SecureRandom.hex(2)}" }
     name { Faker::Lorem.word }
   end
 end
