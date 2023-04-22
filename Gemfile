@@ -38,6 +38,8 @@ gem "pg", "~> 1.4", ">= 1.4.6"
 gem "annotate"
 gem "image_processing", "~> 1.2"
 gem "sidekiq", "~>6.5.1"
+gem "net-http"
+gem "aws-sdk-s3", "~> 1.121"
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
@@ -49,9 +51,11 @@ group :development, :test do
   gem "pry", "~> 0.14.2"
   gem "rspec-rails"
   gem "simplecov", require: false
-  gem "rspec-sidekiq", "~> 3.1"
 end
 
+group :test do
+  gem "rspec-sidekiq", "~> 3.1"
+end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"

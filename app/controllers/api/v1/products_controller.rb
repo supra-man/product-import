@@ -9,7 +9,7 @@ module Api
       def index
         products = Product.all.map do |product|
           images = product.images.map { |image| rails_blob_url(image, only_path: true) }
-          { product: product, images: images }
+          { code: product.code, name: product.name, images: images }
         end
 
         render json: { products: products }

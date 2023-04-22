@@ -13,6 +13,9 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    config.disable_monkey_patching = true
+    config.expose_dsl_globally = true
+    config.expect_with(:rspec) { |c| c.syntax = :expect }
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
