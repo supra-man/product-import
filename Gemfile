@@ -40,6 +40,7 @@ gem "image_processing", "~> 1.2"
 gem "sidekiq", "~>6.5.1"
 gem "net-http"
 gem "aws-sdk-s3", "~> 1.121"
+gem "active_model_serializers", "~> 0.10.13"
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
