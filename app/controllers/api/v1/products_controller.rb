@@ -3,16 +3,18 @@
 module Api
   module V1
     class ProductsController < ApplicationController
+      include ApplicationHelper
       require "csv"
       before_action :set_product, only: %i[show update destroy]
 
       def index
-        products = Product.all.map do |product|
+        page = params[:page].blank? ? 1 : params[:page]
+        size = params[:size].blank? ? default_page_size : params[:size]
+        products = Product.page(page).per(size).map do |product|
           images = product.images.map { |image| rails_blob_url(image, only_path: true) }
           { code: product.code, name: product.name, images: images }
         end
-
-        render json: { products: products }
+        render json: { products: products, meta: pagination_params(Product.page(page).per(size)) }
       end
 
       def show
@@ -80,6 +82,20 @@ module Api
 
         { valid: true, csv_data: csv }
       end
+
+      def default_page_size
+        Kaminari.config.default_per_page
+      end
+
+      # def pagination_params(obj)
+      #   {
+      #     current_page: obj.current_page,
+      #     next_page: obj.next_page,
+      #     prev_page: obj.prev_page,
+      #     total_pages: obj.total_pages,
+      #     total_count: obj.total_count,
+      #   }
+      # end
     end
   end
 end

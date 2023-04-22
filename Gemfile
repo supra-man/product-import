@@ -41,6 +41,7 @@ gem "sidekiq", "~>6.5.1"
 gem "net-http"
 gem "aws-sdk-s3", "~> 1.121"
 gem "active_model_serializers", "~> 0.10.13"
+gem "kaminari", "~> 1.2", ">= 1.2.2"
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
