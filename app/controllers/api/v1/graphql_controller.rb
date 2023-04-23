@@ -1,8 +1,8 @@
-require Rails.root.join("app/graphql/my_schema")
+require Rails.root.join("app/graphql/schema")
 
 class Api::V1::GraphqlController < ApplicationController
   def execute
-    result = MySchema.execute(
+    result = Schema.execute(
       params[:query],
       variables: params[:variables],
     )
