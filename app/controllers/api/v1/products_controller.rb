@@ -1,51 +1,60 @@
-class Api::V1::ProductsController < ApplicationController
-  before_action :set_api_v1_product, only: %i[ show update destroy ]
+# frozen_string_literal: true
 
-  # GET /api/v1/products
-  def index
-    @api_v1_products = Api::V1::Product.all
+module Api
+  module V1
+    class ProductsController < ApplicationController
+      include ApplicationHelper
+      require "csv"
+      before_action :set_product, only: %i[show update destroy]
 
-    render json: @api_v1_products
-  end
+      def index
+        page = params[:page].blank? ? 1 : params[:page]
+        size = params[:size].blank? ? default_page_size : params[:size]
+        products = Product.page(page).per(size).map do |product|
+          images = product.images.map do |image|
+            { filename: image.filename, url: rails_blob_url(image, only_path: true) }
+          end
+          { code: product.code, name: product.name, images: images }
+        end
+        render json: { products: products, meta: pagination_params(Product.page(page).per(size)) }
+      end
 
-  # GET /api/v1/products/1
-  def show
-    render json: @api_v1_product
-  end
+      def show
+        product = Product.find(params[:id])
+        images = product.images.map do |image|
+          { filename: image.filename, url: rails_blob_url(image, only_path: true) }
+        end
 
-  # POST /api/v1/products
-  def create
-    @api_v1_product = Api::V1::Product.new(api_v1_product_params)
+        render json: { product: product, images: images }
+      end
 
-    if @api_v1_product.save
-      render json: @api_v1_product, status: :created, location: @api_v1_product
-    else
-      render json: @api_v1_product.errors, status: :unprocessable_entity
+      def import_products
+        file = params[:csv_file]
+        csv_data = extract_csv(file)
+        if csv_data[:valid]
+          response = ImportProductWorker.perform_async(csv_data[:csv_data])
+          render json: "CSV submitted for processing.", status: :created
+        else
+          render json: csv_data[:message]
+        end
+      end
+
+      def destroy
+        product = Product.find(params[:id])
+        product.images.purge # deletes all associated images
+        product.destroy # deletes the product
+        render json: { message: "Product deleted successfully" }
+      end
+
+      private
+
+      def set_product
+        @product = Product.find(params[:id])
+      end
+
+      def product_params
+        params.require(:product).permit(:code, :name, :csv_file, :images)
+      end
     end
   end
-
-  # PATCH/PUT /api/v1/products/1
-  def update
-    if @api_v1_product.update(api_v1_product_params)
-      render json: @api_v1_product
-    else
-      render json: @api_v1_product.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /api/v1/products/1
-  def destroy
-    @api_v1_product.destroy
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_product
-      @api_v1_product = Api::V1::Product.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def api_v1_product_params
-      params.fetch(:api_v1_product, {})
-    end
 end
