@@ -3,14 +3,17 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      post '/graphql', to: 'graphql#execute'
+      post "/graphql", to: "graphql#execute"
       resources :products do
         collection do
-          post 'import', action: 'import_products'
+          post "import", action: "import_products"
+          get "get_product", action: "get_product"
+          delete "delete_product", action: "delete"
         end
       end
     end
   end
+
   # post 'api/v1/products/import', :to => 'api/v1/products#import_products'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
