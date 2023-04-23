@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      post '/graphql', to: 'graphql#execute'
       resources :products do
         collection do
           post 'import', action: 'import_products'
