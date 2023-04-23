@@ -28,6 +28,18 @@ module Api
         render json: { product: product, images: images }
       end
 
+      def get_product
+        product = Finder.product_finder(params)
+        if product[:message] == "Not Found"
+          render json: { message: "Product not found" }
+        else
+          images = product.images.map do |image|
+            { filename: image.filename, url: rails_blob_url(image, only_path: true) }
+          end
+          render json: { product: product, images: images }
+        end
+      end
+
       def import_products
         file = params[:csv_file]
         csv_data = extract_csv(file)
@@ -41,9 +53,20 @@ module Api
 
       def destroy
         product = Product.find(params[:id])
-        product.images.purge # deletes all associated images
-        product.destroy # deletes the product
+        product.images.purge
+        product.destroy
         render json: { message: "Product deleted successfully" }
+      end
+
+      def delete
+        product = Finder.product_finder(params)
+        if product[:message] == "Not Found"
+          render json: { message: "Product not found" }
+        else
+          product.images.purge
+          product.destroy
+          render json: { message: "Product deleted successfully" }
+        end
       end
 
       private
