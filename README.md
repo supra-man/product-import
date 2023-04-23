@@ -32,7 +32,7 @@ Make sure you have the following installed on your local machine:
 
 ### NOTE:
 
-ruby-vips gem has been used as a image processing library to optimize bulk image insertion, if an error comes while running the server,libvip should be install or ruby-vip gem sould be removed from Gemfile.
+ruby-vips gem has been used as a image processing library to optimize image insertion, if an error orrcurs while running the server,libvip should be install or ruby-vip gem sould be removed from Gemfile.
 
 - `sudo apt install libvips`
 
@@ -41,5 +41,5 @@ ruby-vips gem has been used as a image processing library to optimize bulk image
 Rspec has been used to carry out tests.
 
 - To run the tests, use the following command:
-
+  - `rails db:test:prepare`
   - `rspec`
